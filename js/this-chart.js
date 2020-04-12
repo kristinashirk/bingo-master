@@ -18,11 +18,6 @@ function validate_bingo() {
     return true;
 
 }
-function key_to_link()
-{
-    return basemap_location + '?key=' +  _.reduce(key, function (a,b) {return a + b;});
-
-}
 function check_bingo_diag_top()
 {
     for(var i = 0; i < CARDSIZE; i++)
@@ -144,7 +139,6 @@ function update_bingo()
 
     if(bingo)
     {
-     $('#yell-link').attr('href', 'https://twitter.com/intent/tweet?hashtags=debatebingo&url='+encodeURI(key_to_link())+"&text="+encodeURIComponent("BINGO!!! Check out my bingo card and make your own"));
         $('#yell-button').attr('src', 'img/yellbingo_active.png');
 
     }
@@ -154,8 +148,6 @@ function update_bingo()
         $('#yell-link').attr("href", "#");
 
     }
-    $('#sharestuff').html(share_template({permalink : key_to_link() }));
-    $('#printurl').attr("href",key_to_link().replace("newcard","printcard"));
 
 }
 function shareBox()
@@ -179,7 +171,7 @@ function toggle_chip(row, col)
     }
     update_bingo();
 }
-    
+
 function has_chip(row, col)
 {
     var index = parseInt(row * CARDSIZE, 10);
@@ -203,7 +195,7 @@ function make_random_key()
         for(var row = 0; row < CARDSIZE; row++)
         {
             key[row * CARDSIZE + col] = String.fromCharCode(indices[row] + lowercase);
-            
+
         }
 
     }
@@ -244,10 +236,10 @@ function make_card()
         }
 
 
-            
+
 
         else {
-            cards[row][col] = {text: ds.column(columnNames[col]).data[index], 
+            cards[row][col] = {text: ds.column(columnNames[col]).data[index],
             chip: chip,
             row: row,
             col: col};
@@ -259,7 +251,7 @@ function make_card()
         for (var c = 0; c < CARDSIZE; c++)
         {
             $('#chart-container').append(card_template(cards[r][c]));
-        
+
         }
     }
     $('.chip .card-text').hide();
@@ -314,7 +306,7 @@ function make_card()
             $(this).css('background-image', 'url("img/piece_bg.png")');
         }
 
-            
+
 
 
     });
@@ -363,10 +355,10 @@ function make_card()
 }
 
 
-                
-                
-            
-        
+
+
+
+
 
 
 $.ready()
@@ -381,8 +373,8 @@ $.ready()
 ds.fetch({
 success : function() {
     make_card();
-    
-    
+
+
 },
 error : function() {
 // your error callback here!
